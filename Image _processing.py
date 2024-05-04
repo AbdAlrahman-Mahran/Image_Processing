@@ -31,17 +31,21 @@ def plot_histograms(image_1, image_2,title_1="Orignal", title_2="New Image"):
     plt.show()
 
 #function to plot the histogram of each of the three channels
-def plot_3_channels(image):
+def plot_3_channels(images):
     color = ('blue','green','red')
     intensity_values=np.array([x for x in range(256)])
-
-    for i,col in enumerate(color):
-        histogram = cv2.calcHist([image],[i],None,[256],[0,256])
-        plt.plot(intensity_values,histogram,color = col,label=col+" channel")
-        
-        plt.xlim([0,256])
-    plt.legend()
-    plt.title("Histogram Channels")
+    for j,image in enumerate(images):
+        plt.subplot(1,2,j+1)
+        for i,col in enumerate(color):
+            histogram = cv2.calcHist([image],[i],None,[256],[0,256])
+            plt.plot(intensity_values,histogram,color = col,label=col+" channel")
+            
+            plt.xlim([0,256])
+            plt.legend()
+        if j==0:
+            plt.title("Original Histogram Channels")
+        else:
+            plt.title("Modified Histogram Channels")
     plt.show()
 
 
@@ -53,7 +57,7 @@ alpha = 0.5
 beta = 80
 modified_image=cv2.convertScaleAbs(image,alpha=alpha,beta=beta)
 
-plot_3_channels(image)
+plot_3_channels([image,modified_image])
 
 plot_images(image,modified_image,'Original','Modified')
 
