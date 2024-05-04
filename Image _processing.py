@@ -30,7 +30,7 @@ def plot_histograms(image_1, image_2,title_1="Orignal", title_2="New Image"):
     plt.xlabel('intensity')
     plt.show()
 
-#function to plot the histogram of each of the three channels
+#function to plot the histogram of each of the three channels of multiple images
 def plot_3_channels(images):
     color = ('blue','green','red')
     intensity_values=np.array([x for x in range(256)])
